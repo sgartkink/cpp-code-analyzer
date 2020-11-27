@@ -4,6 +4,7 @@
 
 #include "dirmodel.h"
 #include "listfiles.h"
+#include "analyzefile.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,13 +24,19 @@ int main(int argc, char *argv[])
     ListFiles listFiles;
     engine.rootContext()->setContextProperty("listFiles", &listFiles);
 
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
+    AnalyzeFile analyzeFile;
+    analyzeFile.start_analyzing_file("/home/szymon/git/cpp-code-analyzer/analyzefile.cpp");
+    qDebug() << "Lines: " << analyzeFile.lines();
+    qDebug() << "Lines no empty: " << analyzeFile.lines_no_empty();
+    qDebug() << "Lines no comments: " << analyzeFile.lines_no_comments();
+
+//    const QUrl url(QStringLiteral("qrc:/main.qml"));
+//    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+//                     &app, [url](QObject *obj, const QUrl &objUrl) {
+//        if (!obj && url == objUrl)
+//            QCoreApplication::exit(-1);
+//    }, Qt::QueuedConnection);
+//    engine.load(url);
 
     return app.exec();
 }

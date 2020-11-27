@@ -13,6 +13,30 @@ Window {
     title: qsTr("Cpp Code Analyzer")
 
     Button {
+        id: btnCountLines
+
+        anchors.bottom: btnOpenFileBrowser.top
+
+        text: qsTr("Count lines in files")
+    }
+
+    Button {
+        id: btnCountLines2
+
+        anchors.bottom: btnCountLines.top
+
+        text: qsTr("Count lines in files without empty lines")
+    }
+
+    Button {
+        id: btnCountLines3
+
+        anchors.bottom: btnCountLines2.top
+
+        text: qsTr("Count lines in files without empty lines and comments")
+    }
+
+    Button {
         id: btnOpenFileBrowser
 
         anchors.centerIn: parent
