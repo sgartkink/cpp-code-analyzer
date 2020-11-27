@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     qDebug() << "Lines: " << analyzeFile.lines();
     qDebug() << "Lines no empty: " << analyzeFile.lines_no_empty();
     qDebug() << "Lines no comments: " << analyzeFile.lines_no_comments();
+    qDebug() << "Includes: " << analyzeFile.includes();
 
 //    const QUrl url(QStringLiteral("qrc:/main.qml"));
 //    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

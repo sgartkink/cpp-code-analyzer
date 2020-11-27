@@ -8,9 +8,7 @@ AnalyzeFile::AnalyzeFile() :
     _lines(0),
     _lines_no_empty(0),
     _lines_no_comments(0)
-{
-
-}
+{}
 
 
 void AnalyzeFile::start_analyzing_file(const QString path)
@@ -53,6 +51,9 @@ void AnalyzeFile::analyze_file()
 
         if (_in_multiline_comment)
             continue;
+
+        if (check_if_include())
+            continue;
     }
 
     qDebug("AnalyzeFile::analyze_file: Finished analyzing file: %s",
@@ -94,4 +95,21 @@ bool AnalyzeFile::check_if_starts_comment()
 
        return false;
     }
+}
+
+
+bool AnalyzeFile::check_if_include()
+{
+    if (_line.indexOf("#include") == 0)
+    {
+        _line = _line.mid(8);
+        _line.replace("<", "");
+        _line.replace(">", "");
+        _line.replace("\"", "");
+        _line = _line.simplified();
+        _includes.append(_line);
+        return true;
+    }
+
+    return false;
 }
