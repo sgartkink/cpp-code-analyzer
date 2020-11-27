@@ -4,6 +4,8 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
+import "view"
+
 Window {
     width: 640
     height: 480
